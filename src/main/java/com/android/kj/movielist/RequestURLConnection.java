@@ -9,11 +9,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RequestURLConnection {
-    public String request(String _url){
+    public String request(String _url) {
         String str, receiveMsg = null;
-        String api_key = "d911521c2f36edffaab6594e30697509";;
+        String api_key = "d911521c2f36edffaab6594e30697509";
+        ;
         try {
-            String urlex=_url+api_key;
+            String urlex = _url + api_key;
             URL url = new URL(urlex);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -27,18 +28,23 @@ public class RequestURLConnection {
                     buffer.append(str);
                 }
                 receiveMsg = buffer.toString();
-                Log.i("result : ", receiveMsg);
+                Log.i("result", receiveMsg);
 
                 reader.close();
+                return receiveMsg;
             } else {
                 Log.i("result", conn.getResponseCode() + "에러");
             }
         } catch (IOException e) {
             e.printStackTrace();
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return receiveMsg;
+        return null;
 
     }
+
 
 }
