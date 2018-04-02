@@ -1,7 +1,6 @@
 package com.android.kj.movielist;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,17 +19,18 @@ public class ListViewAdapter extends BaseAdapter {
     public ListViewAdapter(){
     }
 
-    public void addItem(String title, String date,String grade,String poster) {
+    public void addItem(String title, String date,String grade,String poster,String overview) {
         ListViewItem item = new ListViewItem();
 
         item.setTitle(title);
         item.setDate(date);
         item.setGrade(grade);
         item.setPoster(poster);
+        item.setOverview(overview);
 
         listViewItemList.add(item);
 
-        Log.i("poster path: ",poster);
+        //Log.i("poster path: ",poster);
 
     }
 

@@ -5,6 +5,15 @@ public class ListViewItem {
     private String date;
     private String grade;
     private String poster;
+    private String overview;
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
 
     public String getTitle() {
         return title;

@@ -1,8 +1,11 @@
 package com.android.kj.movielist;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -16,7 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private List<HashMap<String,String>> list=null;
-
+    ListViewAdapter adapter=new ListViewAdapter();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,20 +39,36 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listview);
 
         dataParser(result);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ListViewItem listViewItem=(ListViewItem)parent.getItemAtPosition(position);
 
+                Intent intent =new Intent(getApplicationContext(),movie_detail.class);
+                intent.putExtra("title", listViewItem.getTitle().toString());
+                intent.putExtra("date",listViewItem.getDate().toString());
+                intent.putExtra("grade",listViewItem.getGrade().toString());
+                intent.putExtra("poster",listViewItem.getPoster().toString());
+                intent.putExtra("overview",listViewItem.getOverview().toString());
+                startActivity(intent);
+
+            }
+        });
     }
 
 
     private void dataParser(String result){
-        ListViewAdapter adapter=new ListViewAdapter();
 
-        String title;
-        String date;
-        String grade;
-        String poster;
+
+        String title; //제목
+        String date;  //개봉일
+        String grade; //평점
+        String poster;//영화포스터 경로
+        String overview;//줄거리
 
         try{
-            JSONArray array=new JSONObject(result).getJSONArray("results");
+            final JSONArray array=new JSONObject(result).getJSONArray("results");
 
             for (int i=0; i<array.length();i++){
                 JSONObject object=array.getJSONObject(i);
@@ -58,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
                 date=object.optString("release_date");
                 grade=object.optString("vote_average");
                 poster=object.optString("poster_path");
+                overview=object.optString("overview");
 
-                adapter.addItem(title,date,grade,poster);
+                adapter.addItem(title,date,grade,poster,overview);
 
             }
 
-            listView.setAdapter(adapter);
         } catch (JSONException e) {
             e.printStackTrace();
         }

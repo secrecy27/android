@@ -20,6 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="New Text"
             android:id="@+id/textView1"
             android:textSize="20sp"
@@ -29,6 +30,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="New Text"
             android:id="@+id/textView2"
             android:textSize="16sp"
@@ -36,6 +38,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:id="@+id/textView3"
             android:textSize="16sp"
             android:text="New Text"
