@@ -12,9 +12,9 @@ public class RequestURLConnection {
     public String request(String _url) {
         String str, receiveMsg = null;
         String api_key = "d911521c2f36edffaab6594e30697509";
-        ;
+        String language="&language=ko";
         try {
-            String urlex = _url + api_key;
+            String urlex = _url + api_key+language;
             URL url = new URL(urlex);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
